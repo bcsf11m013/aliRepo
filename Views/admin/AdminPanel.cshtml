@@ -1,0 +1,105 @@
+﻿@{
+    Layout = "~/Views/Shared/_signInLayout.cshtml";
+}
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 col-xs-12 ">
+            <div id="AddID" style="text-align:center">
+
+                <a class="btn btn-primary btn-lg" href="#">Add A New Item</a>
+                <br /> <br />
+                <div id="addIdDiv">
+                    <form action="/admin/AddElement" enctype="multipart/form-data" method="post">
+                        @*<input type="text" name="categoryData" class="form-control" required="required" placeholder="category">*@
+                        <div style="margin-left:40%" class="select-style">
+                            <select id="categData" name="categoryData">
+                                <option disabled selected>Select an option</option>
+                                @{
+                                    var x = ViewBag.list;
+                                }
+                                @foreach (var v in x)
+                                {
+                                    <option value=@v.Name>@v.Name</option>
+                                }
+                            </select>
+                        </div><br />
+                        <input type="text" name="nameData" class="form-control" required="required" placeholder="Name"><br />
+                        <input type="file" name="fileData" class="form-control" required="required" />
+                        <textarea name="text" class="txtcomment"></textarea>
+                        <input id="addDone" type="submit" class="btn btn-primary btn-group-sm" />
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-xs-12">
+            <div class="col-md-6 col-xs-12 ">
+                <div id="UpdateID" style="text-align:center">
+                    <a id="updateId" class="btn btn-primary btn-lg" style="margin-left:67%" href="#">Update Item</a>
+                    <br /><br />
+                    <div id="UpdateIdDiv" >
+                        <form action="/admin/UpdateElement" enctype="multipart/form-data" method="post">
+                            @*<input type="text" name="UpdatecategoryData" class="form-control" required="required" placeholder="category"><br />
+            <input type="text" name="UpdatenameData" class="form-control" required="required" placeholder="Name"><br />*@
+                            <div style="margin-left:40%" class="select-style">
+                                <select id="s1" name="UpdatecategoryData">
+                                    <option>Select an option</option>
+                                    @{
+                                        var x1 = ViewBag.list;
+                                    }
+                                    @foreach (var v in x1)
+                                    {
+                                        <option value=@v.Name>@v.Name</option>
+                                    }
+                                </select>
+                            </div><hr />
+                            <div style="margin-left:40%" class="select-style">
+                                <select id="s3" name="UpdatenameData">
+                                    <option>Select an option</option>
+
+                                </select>
+                            </div><hr />
+                            <input type="file" name="updatefileData"  id="updateImage" class="form-control" required="required" />
+                            <textarea id="txtArea" style="width:120%;margin-left:30px" name="Updatetext" class="txtcomment"></textarea>
+                            <input class="btn btn-primary btn-group-sm" type="submit" />
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        
+        $(document).ready(function () {
+            $('#s1').change(function () { 
+                var t = $("#s1").val();
+                $('#s3').empty();
+                $.getJSON("/admin/getProducts?category=" + t, function (data) {    
+                    $.each(data, function (i, x) {
+                        $("#s3").append("<option value =" +x  +">" + x + "</option>");
+                    });
+                });
+            });
+            
+            $('#s3').change(function () {
+                $('#txtArea').val((" "));
+                
+                var t = $("#s3").val();
+                $.getJSON("/admin/getDescription?desc=" + t, function (data) {
+                    $('#txtArea').val(data.des1);
+                    //$('#updateImage').text(data.image1);
+                        
+                    
+                });
+            });
+            $("#addIdDiv").hide();
+            $("#UpdateIdDiv").hide();
+            $("#AddID").on("click", function () { $("#addIdDiv").show(); $("#UpdateIdDiv").hide(); })
+            $("#addDone").on("click", function () { $("#addIdDiv").hide(); })
+            $("#updateId").on("click", function () { $("#UpdateIdDiv").show(); $("#addIdDiv").hide(); })
+            $("#updateDone").on("click", function () { $("#UpdateIdDiv").hide(); });
+        });
+        </script>
+</div>

@@ -1,0 +1,51 @@
+﻿@model Project.Models.loginClass
+
+@{
+    Layout = "~/Views/Shared/_signInLayout.cshtml";
+}
+
+
+
+    <br /><br />
+    
+p
+<div class="container form-signin">
+    @using (Html.BeginForm("ValidateData", "signIn", "post"))
+    {
+        <h2 class="form-signin-heading">Please sign in</h2>
+    <p id="replaceText" style="color:red">Enter correct username or password</p>
+        @Html.ValidationSummary(true)
+        @Html.Label("Name");
+    <div class="input-block-level">
+        
+        @Html.TextBoxFor(x => x.Email);
+        @Html.ValidationMessageFor(x=>x.Email);
+    </div>
+
+        @Html.Label("Password");
+    <div class="input-block-level">
+        @Html.TextBoxFor(x => x.password);
+        @Html.ValidationMessageFor(x => x.password);
+    </div>
+        @Html.ValidationSummary();
+    
+        
+        <button type="submit" class="btn btn-primary btn-large">Sign In</button>
+    
+    }
+</div>
+@if(Model.flag){}
+@if (Model.flag == false)
+{
+    <script>
+        //$("#replaceText").append("Please enter correct email or password");
+        $("#replaceText").show();
+    </script>
+}
+<script>
+    $("#replaceText").hide();
+</script>
+
+
+
+

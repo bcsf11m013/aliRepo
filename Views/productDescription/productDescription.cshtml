@@ -1,0 +1,39 @@
+﻿
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+    <div class="container">
+        <div class="panel panel-default">
+            <div class="row">
+
+                <div class="panel-body">
+                    @{
+                          var x = ViewBag.x;
+                    }
+                    <div class="col-md-6">
+                        <img src=@x.image alt="image to be here"  width ="300" height="300"/>
+                    </div>
+                    <div class="col-md-6">
+                        
+                        <span class="label label-primary" style="text-align:center;font-size:xx-large">@x.name</span>
+                        <br /><br />
+                        <p>@x.description</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <br /><br />
+    <div class="container">
+        <div class="row">
+            @*<div class="col-md-12">
+                <label class="label label-primary">Comment</label>
+            </div>*@
+
+        </div>
+    </div>
+
+

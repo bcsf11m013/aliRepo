@@ -1,0 +1,110 @@
+﻿
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="container">
+                <div class="well text-center">
+                    The appropriate place where you can get information about new product.
+                </div>
+            </div>
+        </div>
+
+
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            Featured Items
+                        </div>
+                        <div class="panel-body">
+                            @{
+                                var p = ViewBag.prod;
+                                int i = 0;
+                            }
+                            @if (p != null) { 
+                            foreach (var x in p)
+                            {
+                                if(x == null)
+                                {
+                                    break;
+                                }
+                                
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-12">
+                                        <img src=@x.image alt="Product Image" widht="300" height="300" />
+                                    </div>
+                                    
+                                    <div class="col-md-6 col-sm-12">
+                                        <a href="/productDescription/productDescription/@x.Id" ><p>@x.name</p></a>
+                                    </div>  
+                                </div>
+                                i++;
+                            }}
+                            
+                            @*<div class="row">
+                                <div class="col-md-4">
+                                    <img src="~/image1.jpg" alt="192 x 55" />
+                                </div>
+                                <div class="col-md-4">
+                                    <img src="~/rsz_logo.png" alt="192 x 55" />
+                                </div>
+                                <div class="col-md-4">
+                                    <img src="~/rsz_logo.png" alt="192 x 55" />
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <img src="~/rsz_logo.png" alt="192 x 55" />
+                                </div>
+                                <div class="col-md-4">
+                                    <img src="~/rsz_logo.png" alt="192 x 55" />
+                                </div>
+                                <div class="col-md-4">
+                                    <img src="~/rsz_logo.png" alt="192 x 55" />
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <img src="~/rsz_logo.png" alt="192 x 55" />
+                                </div>
+                                <div class="col-md-4">
+                                    <img src="~/rsz_logo.png" alt="192 x 55" />
+                                </div>
+                                <div class="col-md-4">
+                                    <img src="~/rsz_logo.png" alt="192 x 55" />
+                                </div>
+                            </div>*@
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @if (i != 0) { 
+        <div class="row">
+            <div class="col-lg-12">
+                <div class=" container">
+                    <a id="addDone" class="btn btn-primary btn-group-sm" style="align-content:center" href="/categories/next">Next </a>
+                </div>
+            </div>
+        </div>
+        }
+        else
+        {
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="container">
+                        <div class="well text-center">
+                           No Available product
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
